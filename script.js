@@ -1,3 +1,6 @@
+
+
+
 const fortunes = [
     "Сегодня твой день!",
     "Будь готов к неожиданностям.",
@@ -25,7 +28,7 @@ const fortunes = [
 ];
 
 document.getElementById('shuffleFortune').addEventListener('click', () => {
-    const cookies = document.querySelectorAll('.cookie');
+    const cookie = document.getElementById('cookie');
     cookies.forEach(cookie => {
         cookie.style.animation = 'shake 0.5s';
         setTimeout(() => {
