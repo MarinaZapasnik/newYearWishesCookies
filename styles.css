@@ -1,35 +1,27 @@
-body { 
-    font-family: Arial, sans-serif; 
-    margin: 0; padding: 0; 
-    background: url(assets/christmas-background-layout-black-background_1303-12736.avif) no-repeat center center fixed; 
-    background-size: cover;
-} 
-footer { 
-    background-color: #333; 
-    color: white; 
-    padding: 10px 20px; 
-    text-align: center; 
-    position: sticky; 
-    top: 0; width: 100%; 
-} 
-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    background-color: #f8f8f8; 
-    padding: 10px 20px; 
-} 
-header h1 { 
-    margin: 0; 
-} header nav a { 
-    margin-left: 20px; 
-    text-decoration: none; 
-    color: #333; 
-} 
-main { 
-    padding: 20px; 
-} 
-button img { 
-    width: 20px; 
-    height: 20px; 
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url(assets/christmas-background-layout-black-background_1303-12736.avif);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    overflow: hidden;
+}
+header, footer {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+}
+.content {
+    flex: 1;
+    padding: 20px;
+    color: rgb(235, 223, 223);
+    
+}
+.nav-button {
+    margin: 5px;
 }

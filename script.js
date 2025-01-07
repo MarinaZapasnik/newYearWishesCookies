@@ -27,19 +27,40 @@ const fortunes = [
     "Ты научишься новому способу оптимизации производительности."
 ];
 
-document.getElementById('shuffleFortune').addEventListener('click', () => {
-    const cookie = document.getElementById('cookie');
-    cookies.forEach(cookie => {
-        cookie.style.animation = 'shake 0.5s';
-        setTimeout(() => {
-            cookie.style.animation = '';
-        }, 500);
-    });
+const coockieBtn = document.getElementById('coockies')
+const content = document.getElementById('content')
+
+
+coockieBtn.addEventListener('click', () => {
+    content.innerHTML='';
+    const magikCookie = document.createElement('button');
+    magikCookie.textContent = 'Выбери свое печенье'
+    content.append(magikCookie)
+    document.body.style.backgroundImage ="url('assets/watercolor-painting-pattern-fortune-cookies-seamless-repeating-print-chinese-holiday-cookies-chinese-new-year-fortune-telling-cookies-isolated-white-drawn-by-hand_276714-860.avif')" 
+    document.body.style.backgroundRepeat = "repeat";
+    document.body.style.backgroundSize = "auto";
+
+
+
+    magikCookie.addEventListener('click', () => {
+        const prediction = fortunes[Math.floor(Math.random() * fortunes.length)]
+        magikCookie.src = 'assets/png-clipart-fortune-cookie-chinese-cuisine-biscuits-black-and-white-cookie-biscuit-angle-food.png'
+        const oracul = document.createElement('p')
+        oracul.textContent = prediction
+        content.append(oracul)
+    })
 });
 
-document.querySelectorAll('.cookie').forEach((cookie, index) => {
-    cookie.addEventListener('click', () => {
-        const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
-        document.getElementById('fortuneText').textContent = fortunes[randomFortuneIndex];
+let currentParagraph = 0;
+const paragraphs = document.querySelectorAll('.content p');
+document.getElementById('toggle-paragraphs').addEventListener('click', () => {
+    paragraphs.forEach((p, index) => {
+        p.style.display = (index === currentParagraph) ? 'block' : 'none';
     });
+    currentParagraph = (currentParagraph + 1) % paragraphs.length;
+});
+
+// Начальное отображение первого абзаца
+paragraphs.forEach((p, index) => {
+    p.style.display = (index === 0) ? 'block' : 'none';
 });
