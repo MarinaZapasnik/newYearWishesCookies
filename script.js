@@ -78,80 +78,80 @@ const fortunes = [
     "Твое чувство юмора спасет тебя в любой сложной ситуации на работе."
 ];
 
-const content = document.getElementById('content');
+document.addEventListener('DOMContentLoaded', () => {
+    const content = document.getElementById('content');
+    const mainPageBtn = document.getElementById('home');
+    const cookiePageBtn = document.getElementById('coockies');
 
-// Обновляем фон и добавляем инструкцию
-content.innerHTML = '';
-const cookieText = document.createElement('h2');
-cookieText.textContent = 'Кликни по любому месту на странице, чтобы получить свое мотивирующее предсказание';
-content.append(cookieText);
+    mainPageBtn.addEventListener('click', () => {
+        // Очищаем контент
+        content.innerHTML = ''; 
+        content.className = 'content main'; // Меняем класс
 
-document.body.style.backgroundImage = "url('assets/watercolor-painting-pattern-fortune-cookies-seamless-repeating-print-chinese-holiday-cookies-chinese-new-year-fortune-telling-cookies-isolated-white-drawn-by-hand_276714-860.avif')";
-document.body.style.backgroundRepeat = "repeat";
-document.body.style.backgroundSize = "auto";
+        // Добавляем заголовок и аффирмацию
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Аффирмация на 2025 год!';
+        h2.classList.add('main-heading'); // Применяем новый класс
+        const p = document.createElement('p');
+        p.textContent = 'Я с уверенностью осваиваю каждую новую технологию и метод, от DOM манипуляций до асинхронного программирования. Моя страсть к JavaScript и его методам помогает мне находить креативные и эффективные решения. Я совершенствую свои навыки работы с событиями и взаимодействия с элементами на странице. Я успешен в достижении своих целей, и мой путь к мастерству во фронтенд разработке приносит мне радость и удовлетворение.';
+        p.classList.add('main-paragraph'); // Применяем новый класс
 
-let hasReceivedPrediction = false;
-
-// Проверяем, есть ли уже полученное предсказание
-const lastPredictionTime = localStorage.getItem('lastPredictionTime');
-const now = new Date().getTime();
-const oneHour = 1//000 * 60 * 60; // 1 час в миллисекундах
-
-if (lastPredictionTime && now - lastPredictionTime < oneHour) {
-    hasReceivedPrediction = true;
-    cookieText.textContent = 'Твое предсказание на этот час уже получено. Возвращайся позже за новым!';
-}
-
-// Функция для отображения предсказания в месте клика на фоновое изображение
-document.body.addEventListener('click', (event) => {
-    if (hasReceivedPrediction) {
-        // Показать сообщение, что предсказание уже получено
-        const errorPopup = document.createElement('div');
-        errorPopup.style.position = 'absolute';
-        errorPopup.style.left = `${event.clientX}px`;
-        errorPopup.style.top = `${event.clientY}px`;
-        errorPopup.style.backgroundColor = 'white';
-        errorPopup.style.border = '1px solid red';
-        errorPopup.style.padding = '10px';
-        errorPopup.style.borderRadius = '5px';
-        errorPopup.textContent = 'Упс, ты уже получил свое предсказание!';
-        document.body.appendChild(errorPopup);
-
-        setTimeout(() => {
-            errorPopup.remove();
-        }, 3000);
-    } else {
-        const prediction = fortunes[Math.floor(Math.random() * fortunes.length)];
-        const popup = document.createElement('div');
-        popup.style.position = 'absolute';
-        popup.style.left = `${event.clientX}px`;
-        popup.style.top = `${event.clientY}px`;
-        popup.style.backgroundColor = 'white';
-        popup.style.border = '1px solid black';
-        popup.style.padding = '10px';
-        popup.style.borderRadius = '5px';
-        popup.textContent = prediction;
-        document.body.appendChild(popup);
-
-        setTimeout(() => {
-            popup.remove();
-        }, 3000);
-
-        hasReceivedPrediction = true;
-        localStorage.setItem('lastPredictionTime', now);
-        cookieText.textContent = 'Твое предсказание уже получено. Возвращайся за новым через час!';
-    }
-});
-
-let currentParagraph = 0;
-const paragraphs = document.querySelectorAll('.content p');
-document.getElementById('toggle-paragraphs').addEventListener('click', () => {
-    paragraphs.forEach((p, index) => {
-        p.style.display = (index === currentParagraph) ? 'block' : 'none';
+        content.append(h2, p);
     });
-    currentParagraph = (currentParagraph + 1) % paragraphs.length;
-});
 
-paragraphs.forEach((p, index) => {
-    p.style.display = (index === 0) ? 'block' : 'none';
+    cookiePageBtn.addEventListener('click', () => {
+        // Очищаем контент
+        content.innerHTML = ''; 
+        content.className = 'content cookie'; // Меняем класс
+
+        // Добавляем текст для предсказаний
+        const cookieText = document.createElement('h2');
+        cookieText.textContent = 'Кликни по любому печенью, чтобы получить свое мотивирующее предсказание';
+        cookieText.classList.add('cookie-text');
+        content.append(cookieText);
+
+        let hasReceivedPrediction = false;
+        const lastPredictionTime = localStorage.getItem('lastPredictionTime');
+        const now = new Date().getTime();
+        const oneSecond = 1000; // 1 секунда в миллисекундах
+
+        if (lastPredictionTime && now - lastPredictionTime < oneSecond) {
+            hasReceivedPrediction = true;
+            cookieText.textContent = 'Предсказание получено! Возвращайся за новым через час!';
+        }
+
+        // Обработчик события клика на элемент контента
+        content.addEventListener('click', (event) => {
+            if (event.target.className === 'content cookie' || event.target.closest('.cookie')) {
+                if (hasReceivedPrediction) {
+                    const errorPopup = document.createElement('div');
+                    errorPopup.classList.add('error-popup');
+                    errorPopup.style.left = `${event.clientX}px`;
+                    errorPopup.style.top = `${event.clientY}px`;
+                    errorPopup.textContent = 'Упс, ты уже получил свое предсказание!';
+                    document.body.appendChild(errorPopup);
+
+                    setTimeout(() => {
+                        errorPopup.remove();
+                    }, 3000);
+                } else {
+                    const prediction = fortunes[Math.floor(Math.random() * fortunes.length)];
+                    const popup = document.createElement('div');
+                    popup.classList.add('prediction-popup');
+                    popup.style.left = `${event.clientX}px`;
+                    popup.style.top = `${event.clientY}px`;
+                    popup.textContent = prediction;
+                    document.body.appendChild(popup);
+
+                    setTimeout(() => {
+                        popup.remove();
+                    }, 3000);
+
+                    hasReceivedPrediction = true;
+                    localStorage.setItem('lastPredictionTime', now);
+                    cookieText.textContent = 'Предсказание получено! Возвращайся за новым через час!';
+                }
+            }
+        });
+    });
 });
