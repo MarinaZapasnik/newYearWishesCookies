@@ -4,31 +4,57 @@ body, html {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #f0f0f0; /* Общий фон для всего сайта */
 }
-header, footer {
-    background-color: #f8f8f8;
+nav {
+    display: flex;
+}
+
+header {
+    
+    background-color: #f3ebeb92;
+    color: #fff;
     padding: 10px;
-    text-align: center;
 }
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    flex: 1; /* Устанавливаем flex для обеих частей */
+}
+.nav-left {
+    justify-content: flex-start;
+}
+.nav-right {
+    justify-content: flex-end;
+}
+.nav-button {
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
 .content {
     flex: 1;
     display: flex;
-    flex-direction: column; /* Добавляем flex-direction: column */
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: center;    /* Центрирование по вертикали */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: rgb(235, 223, 223);
 }
 .main {
     background-image: url('assets/christmas-background-layout-black-background_1303-12736.avif');
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     overflow: hidden;
 }
-.nav-button {
-    margin: 5px;
-}
-
 .main-heading {
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
@@ -58,15 +84,19 @@ header, footer {
     line-height: 1.6;
 }
 
+audio {
+    margin: 20px 0;
+}
+
 .cookie-text {
     font-family: Arial, sans-serif;
     color: #333;
     text-align: center;
-    margin-top: 20px;
     font-size: 24px;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
+    margin-top: 20px; /* Отступ сверху */
 }
 
 .cookie {
@@ -87,9 +117,172 @@ header, footer {
 }
 
 .prediction-popup {
-    position: absolute;
-    background-color: white;
-    border: 1px solid black;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.question-container {
+    width: 80%;
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.copy-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+.answer-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.answer-button:hover {
+    background-color: #218838;
+}
+
+.answer {
+    display: none;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.subheader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /*background-color: #333; /* Темный фон для хедера */
+    color: white; /* Белый цвет текста для хедера */
+    padding: 10px;
+    text-align: center;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.exam-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+    background-color: transparent; /* Убираем фон под кнопками */
+}
+
+.nav-button.exam-nav-button {
+    width: auto;
+    max-width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-button.exam-nav-button:hover {
+    background-color: #0056b3;
+}
+
+.content.exam {
+    background-image: url('assets/istockphoto-1047259374-612x612.jpg'); /* Фон для страницы экзаменов */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Адаптивность для планшетов и телефонов */
+@media (max-width: 768px) {
+    .nav-left, .nav-right {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-right {
+        margin-left: 0;
+    }
+    .main-heading {
+        font-size: 28px;
+    }
+    .main-paragraph {
+        font-size: 16px;
+    }
+    .cookie-text, .prediction-popup {
+        font-size: 20px;
+    }
+    .nav-button.exam-nav-button {
+        max-width: 100%;
+        width: 90%;
+        margin: 10px 0;
+    }
+    .question-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .nav-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-buttons button {
+        width: 90%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-heading {
+        font-size: 24px;
+    }
+    .main-paragraph {
+        font-size: 14px;
+    }
+    .cookie-text, .prediction-popup {
+        font-size: 18px;
+    }
+    .nav-button.exam-nav-button {
+        max-width: 100%;
+        width: 95%;
+        margin: 8px 0;
+    }
+    .nav-buttons button {
+        width: 95%;
+        margin: 8px 0;
+    }
 }
