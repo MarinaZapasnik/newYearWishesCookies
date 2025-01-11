@@ -88,16 +88,7 @@ audio {
     margin: 20px 0;
 }
 
-.cookie-text {
-    font-family: Arial, sans-serif;
-    color: #333;
-    text-align: center;
-    font-size: 24px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px; /* Отступ сверху */
-}
+
 
 .cookie {
     background-image: url('assets/watercolor-painting-pattern-fortune-cookies-seamless-repeating-print-chinese-holiday-cookies-chinese-new-year-fortune-telling-cookies-isolated-white-drawn-by-hand_276714-860.avif');
@@ -108,15 +99,8 @@ audio {
     height: 100%;
 }
 
-.error-popup {
+.popup {
     position: absolute;
-    background-color: white;
-    border: 1px solid red;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.prediction-popup {
     font-family: Arial, sans-serif;
     color: #333;
     text-align: center;
@@ -124,8 +108,32 @@ audio {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 5px;
-    margin-top: 20px; /* Отступ сверху */
 }
+
+
+.error-popup, .prediction-popup {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.cookie-text {
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+
 
 .question-container {
     width: 80%;
