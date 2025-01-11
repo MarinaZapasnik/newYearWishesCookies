@@ -6,27 +6,31 @@ body, html {
     flex-direction: column;
     background-color: #f0f0f0; /* Общий фон для всего сайта */
 }
+
 nav {
     display: flex;
 }
 
 header {
-    
     background-color: #f3ebeb92;
     color: #fff;
     padding: 10px;
 }
+
 .nav-left, .nav-right {
     display: flex;
     align-items: center;
     flex: 1; /* Устанавливаем flex для обеих частей */
 }
+
 .nav-left {
     justify-content: flex-start;
 }
+
 .nav-right {
     justify-content: flex-end;
 }
+
 .nav-button {
     margin: 5px;
     background-color: #007bff;
@@ -36,6 +40,7 @@ header {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .nav-button:hover {
     background-color: #0056b3;
 }
@@ -48,6 +53,7 @@ header {
     align-items: center;
     color: rgb(235, 223, 223);
 }
+
 .main {
     background-image: url('assets/christmas-background-layout-black-background_1303-12736.avif');
     background-size: cover;
@@ -55,6 +61,7 @@ header {
     background-repeat: no-repeat;
     overflow: hidden;
 }
+
 .main-heading {
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
@@ -88,8 +95,6 @@ audio {
     margin: 20px 0;
 }
 
-
-
 .cookie {
     background-image: url('assets/watercolor-painting-pattern-fortune-cookies-seamless-repeating-print-chinese-holiday-cookies-chinese-new-year-fortune-telling-cookies-isolated-white-drawn-by-hand_276714-860.avif');
     background-repeat: repeat;
@@ -109,7 +114,6 @@ audio {
     padding: 10px;
     border-radius: 5px;
 }
-
 
 .error-popup, .prediction-popup {
     position: absolute;
@@ -133,11 +137,9 @@ audio {
     margin-top: 20px;
 }
 
-
-
 .question-container {
-    width: 80%;
-    max-width: 600px;
+    width: 90%; /* Увеличиваем ширину контейнера вопросов */
+    max-width: 800px; /* Увеличиваем максимальную ширину контейнера */
     background-color: rgba(0, 0, 0, 0.5);
     padding: 15px;
     border-radius: 5px;
@@ -187,11 +189,9 @@ audio {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /*background-color: #333; /* Темный фон для хедера */
     color: white; /* Белый цвет текста для хедера */
     padding: 10px;
     text-align: center;
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
     margin-bottom: 20px;
     position: sticky;
     top: 0;
@@ -235,6 +235,28 @@ audio {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.nav-buttons button {
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-buttons button:hover {
+    background-color: #0056b3;
 }
 
 /* Адаптивность для планшетов и телефонов */

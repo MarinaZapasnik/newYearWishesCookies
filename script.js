@@ -4,91 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const cookiePageBtn = document.getElementById("coockies");
     const examPageBtn = document.getElementById("exam");
 
-    const fortunes = [
-        "Сегодня твой день!",
-        // Добавьте больше предсказаний по желанию
-    ];
-
-    const questions12 = [
-        {
-            code: "const arr = [1, 2, 3];\nconsole.log(arr.map(x => x * 2));",
-            answer: "[2, 4, 6]"
-        },
-        {
-            code: "const str = 'hello';\nconsole.log(str.split('').reverse().join(''));",
-            answer: "olleh"
-        }
-    ];
-
-    const questions13 = [
-        {
-            code: "const obj = {a: 1, b: 2};\nconsole.log(Object.keys(obj));",
-            answer: "['a', 'b']"
-        },
-        {
-            code: "const num = 123;\nconsole.log(num.toString().split('').reverse().join(''));",
-            answer: "321"
-        }
-    ];
-
-    let currentQuestionIndex = 0;
-    let currentQuestions = [];
-
-    function displayQuestion(question) {
-        const questionContainer = document.querySelector('.question-container');
-        questionContainer.innerHTML = '';
-
-        const codeBlock = document.createElement('pre');
-        codeBlock.textContent = question.code;
-        questionContainer.appendChild(codeBlock);
-
-        const copyButton = document.createElement('button');
-        copyButton.classList.add('copy-button');
-        copyButton.textContent = 'Скопировать';
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(question.code).then(() => {
-                alert('Код скопирован!');
-            });
-        });
-        questionContainer.appendChild(copyButton);
-
-        const answerButton = document.createElement('button');
-        answerButton.classList.add('answer-button');
-        answerButton.textContent = 'Показать ответ';
-        const answer = document.createElement('div');
-        answer.classList.add('answer');
-        answer.textContent = question.answer;
-        answerButton.addEventListener('click', () => {
-            answer.style.display = 'block';
-        });
-        questionContainer.appendChild(answerButton);
-        questionContainer.appendChild(answer);
-
-        const navButtons = document.createElement('div');
-        navButtons.classList.add('nav-buttons');
-
-        const prevButton = document.createElement('button');
-        prevButton.textContent = 'Предыдущий';
-        prevButton.addEventListener('click', () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion(currentQuestions[currentQuestionIndex]);
-            }
-        });
-        navButtons.appendChild(prevButton);
-
-        const nextButton = document.createElement('button');
-        nextButton.textContent = 'Следующий';
-        nextButton.addEventListener('click', () => {
-            if (currentQuestionIndex < currentQuestions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion(currentQuestions[currentQuestionIndex]);
-            }
-        });
-        navButtons.appendChild(nextButton);
-
-        questionContainer.appendChild(navButtons);
-    }
+    mainPageBtn.addEventListener('click', loadMainPage);
+    cookiePageBtn.addEventListener('click', loadCookiesPage);
+    examPageBtn.addEventListener('click', loadExamPage);
 
     function loadMainPage() {
         content.innerHTML = ''; 
@@ -115,13 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         content.append(h2, p, audio, audioCaption);
     }
 
-    mainPageBtn.addEventListener('click', loadMainPage);
-
-    let isPopupVisible = false; // Объявление переменной для отслеживания отображения сообщений
-
-    cookiePageBtn.addEventListener('click', () => {
-        isPopupVisible = false; // Сброс флага при загрузке страницы
-
+    function loadCookiesPage() {
         content.innerHTML = ''; 
         content.className = 'content cookie'; 
 
@@ -137,49 +49,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (lastPredictionTime && now - lastPredictionTime < oneHour) {
             hasReceivedPrediction = true;
-            cookieText.textContent = 'Предсказание получено! Возвращайся за новым через час!';
+            cookieText.textContent = 'Предсказание получено! Кликни по кнопке "Печенье с предсказаниями", чтобы получить ещё!';
         }
 
         content.addEventListener('click', (event) => {
-            if (!isPopupVisible && (event.target.className === 'content cookie' || event.target.closest('.cookie'))) {
-                isPopupVisible = true;
-                if (hasReceivedPrediction) {
-                    const errorPopup = document.createElement('div');
-                    errorPopup.classList.add('error-popup');
-                    errorPopup.style.position = 'absolute';
-                    errorPopup.style.left = `${event.clientX}px`;
-                    errorPopup.style.top = `${event.clientY}px`;
-                    errorPopup.textContent = 'Упс, ты уже получил свое предсказание!';
-                    document.body.appendChild(errorPopup);
+            if (!hasReceivedPrediction && (event.target.className === 'content cookie' || event.target.closest('.cookie'))) {
+                const prediction = fortunes[Math.floor(Math.random() * fortunes.length)];
+                const popup = document.createElement('div');
+                popup.classList.add('prediction-popup');
+                popup.style.position = 'absolute';
+                popup.style.left = `${event.clientX}px`;
+                popup.style.top = `${event.clientY}px`;
+                popup.textContent = prediction;
+                document.body.appendChild(popup);
 
-                    setTimeout(() => {
-                        errorPopup.remove();
-                        isPopupVisible = false;
-                    }, 3000);
-                } else {
-                    const prediction = fortunes[Math.floor(Math.random() * fortunes.length)];
-                    const popup = document.createElement('div');
-                    popup.classList.add('prediction-popup');
-                    popup.style.position = 'absolute';
-                    popup.style.left = `${event.clientX}px`;
-                    popup.style.top = `${event.clientY}px`;
-                    popup.textContent = prediction;
-                    document.body.appendChild(popup);
+                setTimeout(() => {
+                    popup.remove();
+                }, 3000);
 
-                    setTimeout(() => {
-                        popup.remove();
-                        isPopupVisible = false;
-                    }, 3000);
-
-                    hasReceivedPrediction = true;
-                    localStorage.setItem('lastPredictionTime', now);
-                    cookieText.textContent = 'Предсказание получено! Возвращайся за новым через час!';
-                }
+                hasReceivedPrediction = true;
+                localStorage.setItem('lastPredictionTime', now);
+                cookieText.textContent = 'Предсказание получено! Кликни по кнопке "Печенье с предсказаниями", чтобы получить ещё!';
             }
         });
-    });
+    }
 
-    examPageBtn.addEventListener('click', () => {
+    function loadExamPage() {
         content.innerHTML = '';
         content.className = 'content exam';
 
@@ -216,7 +111,66 @@ document.addEventListener("DOMContentLoaded", () => {
         const questionContainer = document.createElement('div');
         questionContainer.classList.add('question-container');
         content.appendChild(questionContainer);
-    });
+    }
+
+    function displayQuestion(question) {
+        const questionContainer = document.querySelector('.question-container');
+        questionContainer.innerHTML = '';
+        
+        const codeBlock = document.createElement('pre');
+        codeBlock.textContent = question.code;
+        codeBlock.style.width = '100%';
+        questionContainer.appendChild(codeBlock);
+
+        const copyButton = document.createElement('button');
+        copyButton.classList.add('copy-button');
+        copyButton.textContent = 'Скопировать';
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(question.code).then(() => {
+                alert('Код скопирован!');
+            });
+        });
+        questionContainer.appendChild(copyButton);
+
+        const answerButton = document.createElement('button');
+        answerButton.classList.add('answer-button');
+        answerButton.textContent = 'Показать ответ';
+        const answer = document.createElement('div');
+        answer.classList.add('answer');
+        answer.textContent = question.answer;
+        answerButton.addEventListener('click', () => {
+            answer.style.display = 'block';
+        });
+        questionContainer.appendChild(answerButton);
+        questionContainer.appendChild(answer);
+
+        const navButtons = document.createElement('div');
+        navButtons.classList.add('nav-buttons');
+
+        const prevButton = document.createElement('button');
+        prevButton.textContent = 'Предыдущий';
+        prevButton.classList.add('prev-button');
+        prevButton.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion(currentQuestions[currentQuestionIndex]);
+            }
+        });
+        navButtons.appendChild(prevButton);
+
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Следующий';
+        nextButton.classList.add('next-button');
+        nextButton.addEventListener('click', () => {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(currentQuestions[currentQuestionIndex]);
+            }
+        });
+        navButtons.appendChild(nextButton);
+
+        questionContainer.appendChild(navButtons);
+    }
 
     // Загрузка главной страницы при открытии
     loadMainPage();
