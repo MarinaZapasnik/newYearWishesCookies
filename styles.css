@@ -2,6 +2,8 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
+    overflow: auto; /* Добавляем прокрутку для всего документа */
     display: flex;
     flex-direction: column;
     background-color: #f0f0f0; /* Общий фон для всего сайта */
@@ -52,6 +54,7 @@ header {
     justify-content: center;
     align-items: center;
     color: rgb(235, 223, 223);
+    overflow: auto; /* Добавляем прокрутку для основного содержимого */
 }
 
 .main {
@@ -59,7 +62,7 @@ header {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow: hidden;
+    overflow: auto; /* Добавляем прокрутку для главного содержимого */
 }
 
 .main-heading {
@@ -102,6 +105,7 @@ audio {
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: auto; /* Добавляем прокрутку для страницы с печеньем */
 }
 
 .popup {
@@ -146,6 +150,7 @@ audio {
     margin: 10px 0;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
+    overflow: auto; /* Добавляем прокрутку для контейнера вопросов */
 }
 
 .copy-button {
@@ -227,7 +232,7 @@ audio {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow: hidden;
+    overflow: auto; /* Добавляем прокрутку для страницы экзаменов */
     display: flex;
     flex-direction: column;
     align-items: center;
